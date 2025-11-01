@@ -1,9 +1,6 @@
 [build]
-command = "mise install && mise run build"
-publish = "public"
-
-[[build.cache]]
-path = "!public"
+command = "mise install && mise run build -d /tmp/hugo-build-output"
+publish = "/tmp/hugo-build-output"
 
 [build.environment]
 HUGO_ENABLEGITINFO = "true"
@@ -13,7 +10,9 @@ HUGO_ENV = "production"
 
 
 [context.deploy-preview]
-command = "mise install && mise run build --buildFuture -b $DEPLOY_PRIME_URL"
+command = "mise install && mise run build --buildFuture -b $DEPLOY_PRIME_URL -d /tmp/hugo-build-output"
+publish = "/tmp/hugo-build-output"
 
 [context.branch-deploy]
-command = "mise install && mise run build -b $DEPLOY_PRIME_URL"
+command = "mise install && mise run build -b $DEPLOY_PRIME_URL -d /tmp/hugo-build-output"
+publish = "/tmp/hugo-build-output"
