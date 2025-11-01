@@ -9,12 +9,12 @@ run = ["hugo mod tidy", "hugo mod npm pack", "npm install"]
 
 [tasks.clean]
 description = "Cleanup cached data"
-run = "rm -rf public hugo_build.lock resources/_gen && mkdir -p public"
+run = "rm -rf public hugo_build.lock resources/_gen && install -d -m 0755 public"
 
 [tasks.build]
 description = "Build Hugo site"
 depends = ["install", "clean"]
-run = "hugo --gc --minify"
+run = "HUGO_BUILDLOCKTIMEOUT=0 hugo --gc --minify"
 
 [tasks.server]
 description = "Run hugo server"
